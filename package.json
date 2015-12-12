@@ -1,0 +1,35 @@
+{
+  "name": "cmsreactflux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/app.js",
+  "scripts": {
+    "start": "watchify -o js/bundle.js -v -d js/app.js",
+    "build": "browserify . -t [envify --NODE_ENV production] > js/bundle.min.js",
+    "build_dev": "browserify . -t [envify --NODE_ENV development] > js/bundle_dev.min.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "envify": "^3.4.0",
+    "reactify": "^1.1.1",
+    "uglify-js": "^2.6.1"
+  },
+  "dependencies": {
+    "flux": "^2.1.1",
+    "history": "^1.13.1",
+    "keymirror": "^0.1.1",
+    "object-assign": "^4.0.1",
+    "pace": "0.0.4",
+    "react": "^0.14.3",
+    "react-router": "^1.0.0",
+    "react-router-bootstrap": "^0.19.3"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
+  }
+}
