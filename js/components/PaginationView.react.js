@@ -34,20 +34,38 @@ var PaginationView = React.createClass({
 		console.log('PaginationView page:'+page);
 		this.props.onGotoPage(page);
 	},
+	_handleClickNext: function(){
+		var nextPage = this.state.curpage+1;
+		console.log('next page:'+nextPage);
+		this.setState({
+			curpage: nextPage
+		});
+		this.props.onGotoPage(nextPage);
+	},
+	_handleClickPrevious: function(){
+		var previousPage = this.state.curpage-1;
+		console.log('next page:'+previousPage);
+		this.setState({
+			curpage: previousPage
+		});
+		this.props.onGotoPage(previousPage);
+	},
 	render: function(){
 		var active = this.state.curpage;
+		var activeButtonPrevious = (this.state.curpage<=1)?"paginate_button previous disabled":"paginate_button previous";
 		var itempage = this.state.paging.map(function(numberPage){
 			var activedNumber = (active==numberPage)?true:false;
 			return <ItemPage active={activedNumber} key={numberPage} number={numberPage} _onClickPage={this._handleClick} />
 		},this);
+
 		return (
 				<ul className="pagination pagination-sm">
-					<li className="paginate_button previous disabled" aria-controls="datatable_fixed_column" id="datatable_fixed_column_previous">
-						<a href="javascript:;">Previous</a>
+					<li className={activeButtonPrevious} aria-controls="datatable_fixed_column" id="datatable_fixed_column_previous">
+						<a href="javascript:;" onClick={this._handleClickPrevious}>Previous</a>
 					</li>
 					{itempage}
 					<li className="paginate_button next" aria-controls="datatable_fixed_column" id="datatable_fixed_column_next">
-						<a href="#">Next</a>
+						<a href="javascript:;" onClick={this._handleClickNext}>Next</a>
 					</li>
 				</ul>
 			);
