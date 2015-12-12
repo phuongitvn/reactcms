@@ -45,10 +45,12 @@ var PaginationView = React.createClass({
 	_handleClickPrevious: function(){
 		var previousPage = this.state.curpage-1;
 		console.log('next page:'+previousPage);
-		this.setState({
-			curpage: previousPage
-		});
-		this.props.onGotoPage(previousPage);
+		if(previousPage>1){
+			this.setState({
+				curpage: previousPage
+			});
+			this.props.onGotoPage(previousPage);
+		}
 	},
 	render: function(){
 		var active = this.state.curpage;
